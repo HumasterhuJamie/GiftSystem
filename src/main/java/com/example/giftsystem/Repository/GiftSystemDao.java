@@ -47,7 +47,7 @@ public class GiftSystemDao {
 		jdbctemplate.update("update cus_select_data set cus_address = ?, cus_phone = ?, cus_email = ?, cus_deliver_date = ?,  product_status = ?"
 				+ ", receive_time = ?, recipient = ?, cus_mobile = ?, cus_city = ? where cus_id = ? and product_id = ? and product_status = ? and id = ?",
 				cusSelectData.getCus_address(), cusSelectData.getCus_phone(), cusSelectData.getCus_email(), new java.sql.Date(cusSelectData.getCus_deliver_date().getTime()), 
-				"order_success", cusSelectData.getReceive_time(), cusSelectData.getRecipient(), cusSelectData.getCus_mobile(), cusSelectData.getCus_city()
+				"order_success",new java.sql.Date(cusSelectData.getReceive_time().getTime()) , cusSelectData.getRecipient(), cusSelectData.getCus_mobile(), cusSelectData.getCus_city()
 				, cusSelectData.getCus_id(), cusSelectData.getProduct_id(), "pre_order", cusSelectData.getId());
 		
 		jdbctemplate.update("insert into cus_select_log(cus_id, product_id, cus_option, exe_date) values (?,?,?,NOW())",
@@ -59,7 +59,7 @@ public class GiftSystemDao {
 		jdbctemplate.update("update cus_select_data set cus_address = ?, cus_phone = ?, cus_email = ?, cus_deliver_date = ?"
 				+ ", receive_time = ?, recipient = ?, cus_mobile = ?, cus_city = ? where cus_id = ? and product_id = ? and product_status = ? and id = ?",
 				cusSelectData.getCus_address(), cusSelectData.getCus_phone(), cusSelectData.getCus_email(), new java.sql.Date(cusSelectData.getCus_deliver_date().getTime()), 
-				cusSelectData.getReceive_time(), cusSelectData.getRecipient(), cusSelectData.getCus_city(), cusSelectData.getCus_city()
+				new java.sql.Date(cusSelectData.getReceive_time().getTime()) , cusSelectData.getRecipient(), cusSelectData.getCus_city(), cusSelectData.getCus_city()
 				, cusSelectData.getCus_id(), cusSelectData.getProduct_id(), "order_success", cusSelectData.getId());
 		
 		jdbctemplate.update("insert into cus_select_log(cus_id, product_id, cus_option, exe_date) values (?,?,?,NOW())",
@@ -191,9 +191,6 @@ public class GiftSystemDao {
 	public List<ProductInfo> getProductInfos(List<String> product_ids) {
 		MapSqlParameterSource parameters = new MapSqlParameterSource();
 		parameters.addValue("ids", product_ids);
-
-		System.out.println("data count : " + product_ids.size() + "  " + product_ids.get(0));
-		
 		List<ProductInfo> productInfos = namedParameterjdbctemplate.query("select * from product_info where product_id in (:ids)",
 				parameters,new ProductInfoMapper());
 		
@@ -225,7 +222,7 @@ public class GiftSystemDao {
 			cusOrderInfo.setProduct_status(rs.getString("product_status"));
 			cusOrderInfo.setCus_phone(rs.getString("cus_phone"));
 			cusOrderInfo.setCus_id(rs.getString("cus_id"));
-			cusOrderInfo.setReceive_time(rs.getString("receive_time"));
+			cusOrderInfo.setReceive_time(rs.getDate("receive_time"));
 			cusOrderInfo.setRecipient(rs.getString("recipient"));
 			cusOrderInfo.setCus_mobile(rs.getString("cus_mobile"));
 			cusOrderInfo.setCus_city(rs.getString("cus_city"));
@@ -273,7 +270,7 @@ public class GiftSystemDao {
 			productDateInfo.setProduct_date_stock(rs.getInt("product_date_stock"));
 			productDateInfo.setProduct_date_total(rs.getInt("product_date_total"));
 			productDateInfo.setProduct_date(rs.getDate("product_date"));
-			productDateInfo.setProduct_display_date(rs.getString("product_display_date"));
+			productDateInfo.setProduct_display_date(rs.getDate("product_display_date"));
 
 			return productDateInfo;
 		}

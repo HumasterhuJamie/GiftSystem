@@ -26,7 +26,7 @@ public class CusOrderInfo {
 	private String cus_email;	
 	private Date cus_deliver_date;		
 	private String recipient;
-	private String receive_time;	
+	private Date receive_time;	
 	private String cus_mobile;
 	private String cus_city;
 
@@ -132,10 +132,10 @@ public class CusOrderInfo {
 	public void setRecipient(String recipient) {
 		this.recipient = recipient;
 	}
-	public String getReceive_time() {
+	public Date getReceive_time() {
 		return receive_time;
 	}
-	public void setReceive_time(String receive_time) {
+	public void setReceive_time(Date receive_time) {
 		this.receive_time = receive_time;
 	}
 	public String getCus_mobile() {

@@ -15,7 +15,7 @@ public class ProductDateInfo {
 	private int product_date_stock;
 	private int product_date_total;
 	private Date product_date;
-	private String product_display_date; 
+	private Date product_display_date; 
 	
 	public int getId() {
 		return id;
@@ -47,10 +47,10 @@ public class ProductDateInfo {
 	public void setProduct_date(Date product_date) {
 		this.product_date = product_date;
 	}
-	public String getProduct_display_date() {
+	public Date getProduct_display_date() {
 		return product_display_date;
 	}
-	public void setProduct_display_date(String product_display_date) {
+	public void setProduct_display_date(Date product_display_date) {
 		this.product_display_date = product_display_date;
 	}
 	
