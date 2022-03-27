@@ -39,9 +39,7 @@ public class GiftSystemDao {
 		jdbctemplate.update("insert into cus_select_log(cus_id, product_id, cus_option, exe_date) values (?,?,?,NOW())",
 				cusSelectData.getCus_id(), cusSelectData.getProduct_id(), "pre_order");
 		
-	}
-	
-	
+	}	
 	public void saveDeliveryData(CusOrderInfo cusSelectData) {
 		jdbctemplate.execute("commit;");
 		jdbctemplate.update("update cus_select_data set cus_address = ?, cus_phone = ?, cus_email = ?, cus_deliver_date = ?,  product_status = ?"
@@ -186,15 +184,6 @@ public class GiftSystemDao {
 		List<ProductInfo> productImages = jdbctemplate.query("select id,product_id,img_url from product_info where product_id = ?",
 				new ProductImageMapper(), product_id);		
 		return productImages;
-	}
-	
-	public List<ProductInfo> getProductInfos(List<String> product_ids) {
-		MapSqlParameterSource parameters = new MapSqlParameterSource();
-		parameters.addValue("ids", product_ids);
-		List<ProductInfo> productInfos = namedParameterjdbctemplate.query("select * from product_info where product_id in (:ids)",
-				parameters,new ProductInfoMapper());
-		
-		return productInfos;
 	}
 	
 	public List<CusOrderInfo> getCusOrderInfo(String cus_id) {

@@ -23,8 +23,7 @@ public class GiftSystemService {
 	
 	
 	/**
-	 * 預定商品
-	 * @param CusSelectData
+	 * 預定商品	  
 	 */
 	public boolean saveCusSelectData(CusOrderInfo CusSelectData) {
 
@@ -39,9 +38,9 @@ public class GiftSystemService {
 		}
 		return false;
 	}
-	
-
-	
+	/**
+	 * 更新運送date資訊
+	 */	
 	public boolean updateDeliveryData(CusOrderInfo CusSelectData) {
 		ProductDateInfo productDateInfo = GiftSystemDao.getProductDateInfoById(CusSelectData.getProduct_id(), CusSelectData.getCus_deliver_date());
 		if(CusSelectData.getProduct_status().equals("order_success")) {			
@@ -57,10 +56,15 @@ public class GiftSystemService {
 		}
 		return false;
 	}	
+	/**
+	 * 取消所有訂單
+	 */
 	public void cancelAllCusSelectData(String cus_id) {
 		GiftSystemDao.cancelAllCusSelectData(cus_id);
 	}
-	
+	/**
+	 * 取消單張訂單
+	 */
 	public void cancelCusSelectData(String cus_id, int order_id) {
 		GiftSystemDao.cancelCusSelectData(cus_id, order_id);
 	}
@@ -101,12 +105,6 @@ public class GiftSystemService {
 	 */	
 	public List<ProductInfo> getProductImages(String product_id) {
 		return GiftSystemDao.getProductImages(product_id);
-	}
-	/**
-	 * 依照產品ID獲取商品資訊
-	 */
-	public List<ProductInfo> getProductInfos(List<String> product_ids) {
-		return GiftSystemDao.getProductInfos(product_ids);
 	}
 	/**
 	 * 獲取用戶的訂單中狀態非cancel的訂單
