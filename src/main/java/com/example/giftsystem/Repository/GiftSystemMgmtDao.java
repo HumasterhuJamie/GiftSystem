@@ -31,10 +31,15 @@ public class GiftSystemMgmtDao {
 	@Autowired
 	private NamedParameterJdbcTemplate namedParameterjdbctemplate;
 	//新增商品
-	public void insertProductInfo(ProductInfo ProductInfo) {				
+	public boolean insertProductInfo(ProductInfo ProductInfo) {	
+		try {
 		jdbctemplate.update("insert into product_info(product_id, product_name, product_stock, porduct_total, product_type, img_url, supplier, price) values (?,?,?,?,?,?,?,?)",
 				ProductInfo.getProduct_id(),ProductInfo.getProduct_name(),ProductInfo.getProduct_stock(),ProductInfo.getPorduct_total(),
 				ProductInfo.getProduct_type(),ProductInfo.getImg_url(),ProductInfo.getSupplier(),ProductInfo.getPrice());
+			return true;
+		}catch(Exception e) {
+			return false;
+		}
 	}
 	//獲取所有商品	
 	public List<ProductInfo> getProductInfo() {		
@@ -42,21 +47,36 @@ public class GiftSystemMgmtDao {
 		return productInfos;
 	}
 	//更新商品
-	public void updateProductInfo(ProductInfo ProductInfo) {		
+	public boolean updateProductInfo(ProductInfo ProductInfo) {	
+		try {
 		jdbctemplate.update("update product_info set product_id = ?,product_name = ?,product_stock= ? ,porduct_total = ?,product_type = ?,img_url = ?,supplier = ?,price = ?"
 				+ "where id = ?",ProductInfo.getProduct_id(),ProductInfo.getProduct_name(),ProductInfo.getProduct_stock(),ProductInfo.getPorduct_total(),
 				ProductInfo.getProduct_type(),ProductInfo.getImg_url(),ProductInfo.getSupplier(),ProductInfo.getPrice(),ProductInfo.getId());		
+			return true;
+		}catch(Exception e) {
+			return false;
+		}
 	}
 	//刪除商品
-	public void deleteProductInfo(int id) {		
-		jdbctemplate.update("delete from product_info where id = ?",id);		
+	public boolean deleteProductInfo(int id) {	
+		try {
+		jdbctemplate.update("delete from product_info where id = ?",id);	
+			return true;
+		}catch(Exception e) {
+			return false;
+		}
 	}
 	
 	//新增商品(Date)
-	public void insertProductDateInfo(ProductDateInfo ProductDateInfo) {				
+	public boolean insertProductDateInfo(ProductDateInfo ProductDateInfo) {				
+		try {
 		jdbctemplate.update("insert into product_date_info(product_id, product_date_stock, product_date_total, product_date, product_display_date) values (?,?,?,?,?)",
 				ProductDateInfo.getProduct_id(),ProductDateInfo.getProduct_date_stock(),ProductDateInfo.getProduct_date_total(),
 				new java.sql.Date(ProductDateInfo.getProduct_date().getTime()),	new java.sql.Date(ProductDateInfo.getProduct_display_date().getTime()));
+			return true;
+		}catch(Exception e) {
+			return false;
+		}
 	}
 	//獲取所有商品(Date)
 	public List<ProductDateInfo> getProductDateInfo() {		
@@ -64,14 +84,24 @@ public class GiftSystemMgmtDao {
 		return ProductDateInfos;
 	}
 	//更新商品(Date)
-	public void updateProductDateInfo(ProductDateInfo ProductDateInfo) {		
+	public boolean updateProductDateInfo(ProductDateInfo ProductDateInfo) {		
+		try {
 		jdbctemplate.update("update product_date_info set product_id = ?,product_date_stock = ?,product_date_total= ? ,product_date = ?,product_display_date = ? "
 				+ "where id = ?",ProductDateInfo.getProduct_id(),ProductDateInfo.getProduct_date_stock(),ProductDateInfo.getProduct_date_total(),
 				new java.sql.Date(ProductDateInfo.getProduct_date().getTime()),	new java.sql.Date(ProductDateInfo.getProduct_display_date().getTime()),ProductDateInfo.getId());		
+			return true;
+		}catch(Exception e) {
+			return false;
+		}
 	}
 	//刪除商品(Date)
-	public void deleteProductDateInfo(int id) {		
+	public boolean deleteProductDateInfo(int id) {		
+		try {
 		jdbctemplate.update("delete from product_date_info where id = ?",id);		
+			return true;
+		}catch(Exception e) {
+			return false;
+		}
 	}
 	
 	private static class ProductInfoMapper implements RowMapper<ProductInfo> {

@@ -34,29 +34,29 @@ public class GiftSystemMgmtService {
 	/**
 	 * 新增商品
 	 * */
-	public void insertProductInfo(ProductInfo ProductInfo) {
-		GiftSystemMgmtDao.insertProductInfo(ProductInfo);
+	public boolean insertProductInfo(ProductInfo ProductInfo) {
+		return GiftSystemMgmtDao.insertProductInfo(ProductInfo);
 	}
-	public void insertProductDateInfo(ProductDateInfo ProductDateInfo) {
-		GiftSystemMgmtDao.insertProductDateInfo(ProductDateInfo);
+	public boolean insertProductDateInfo(ProductDateInfo ProductDateInfo) {
+		return GiftSystemMgmtDao.insertProductDateInfo(ProductDateInfo);
 	}
 	/**
 	 * 更新商品
 	 * */
-	public void updateProductInfo(ProductInfo ProductInfo) {	
-		GiftSystemMgmtDao.updateProductInfo(ProductInfo);
+	public boolean updateProductInfo(ProductInfo ProductInfo) {	
+		return GiftSystemMgmtDao.updateProductInfo(ProductInfo);
 	}
-	public void updateProductDateInfo(ProductDateInfo ProductDateInfo) {	
-		GiftSystemMgmtDao.insertProductDateInfo(ProductDateInfo);
+	public boolean updateProductDateInfo(ProductDateInfo ProductDateInfo) {	
+		return GiftSystemMgmtDao.insertProductDateInfo(ProductDateInfo);
 	}
 	/**
 	 * 刪除商品
 	 * */
-	public void deleteProductInfo(int id) {		
-		GiftSystemMgmtDao.deleteProductInfo(id);
+	public boolean deleteProductInfo(int id) {		
+		return GiftSystemMgmtDao.deleteProductInfo(id);
 	}
-	public void deleteProductDateInfo(int id) {		
-		GiftSystemMgmtDao.deleteProductDateInfo(id);
+	public boolean deleteProductDateInfo(int id) {		
+		return GiftSystemMgmtDao.deleteProductDateInfo(id);
 	}
 	
 }

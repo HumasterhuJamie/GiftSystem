@@ -43,9 +43,7 @@ public class GiftSystemController {
         return "index";
     }
 	/**
-	 * 獲取可選擇之商品
-	 * @param cus_id
-	 * @return
+	 * 獲取可選擇之商品	 
 	 */
 	@CrossOrigin
 	@GetMapping("/getProductInfo")
