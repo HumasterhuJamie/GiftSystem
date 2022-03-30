@@ -8,7 +8,7 @@
 
 http://localhost:8080/swagger-ui.html
 
-![giftswagger-1](https://user-images.githubusercontent.com/101760522/160773252-98cc6be6-d3ff-477d-a115-427d102cc1b3.png)
+![giftswagger-1](https://user-images.githubusercontent.com/101760522/160773745-599e21a7-5a3c-4847-a421-1a24656a050f.png)
 
-![giftswagger-2](https://user-images.githubusercontent.com/101760522/160772893-7e29de19-0d71-4e36-ada8-de1c13ec5a35.png)
+![giftswagger-2](https://user-images.githubusercontent.com/101760522/160773765-396cb819-129a-4832-88ba-3240854463d4.png)
 
