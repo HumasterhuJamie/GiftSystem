@@ -8,3 +8,6 @@
 
 http://localhost:8080/swagger-ui.html
 
+![giftswagger-1](https://user-images.githubusercontent.com/101760522/160772654-b647e258-78a0-4c98-908f-3e175d7651e3.png)
+
+![giftswagger-2](https://user-images.githubusercontent.com/101760522/160772658-e03047af-2bf2-46ce-85f9-65fa491d2313.png)
