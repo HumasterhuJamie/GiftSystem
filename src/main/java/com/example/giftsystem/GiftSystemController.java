@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.example.giftsystem.beans.CusInfo;
 import com.example.giftsystem.beans.CusOrderInfo;
@@ -21,30 +22,24 @@ import com.example.giftsystem.beans.ProductInfoReturnData;
 import com.example.giftsystem.beans.ResultBean;
 import com.example.giftsystem.service.GiftSystemService;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
+
 
 
 @CrossOrigin
 @RestController
+@Tag(name = "使用者介面", description = "使用者觀看、新增、修改、刪除訂單")
 public class GiftSystemController {
 	
 
 	@Autowired
 	GiftSystemService giftsystemService;
-	
-	@RequestMapping("/")
-	public String test() {
-		return"測試成功";
-	}
-	
-	@RequestMapping("/testpage")
-	public String test(@RequestParam(value="title", required=false, defaultValue="xiao") String title, Model model) {
 
-        
-        return "index";
-    }
 	/**
 	 * 獲取可選擇之商品	 
 	 */
+	@Operation(summary = "獲取可選擇之商品")
 	@CrossOrigin
 	@GetMapping("/getProductInfo")
 	public ResultBean getProductInfo() {
@@ -69,6 +64,7 @@ public class GiftSystemController {
 	 * @param cus_id
 	 * @return
 	 */
+	@Operation(summary = "獲取用戶的訂單中狀態非cancel的訂單")
 	@CrossOrigin
 	@GetMapping("/getcusOrderProductInfo")
 	public ResultBean getcusOrderProductInfo(@RequestParam(value="cus_id", required=true) String cus_id) {		
@@ -93,6 +89,7 @@ public class GiftSystemController {
 	 * @param cus_id
 	 * @return
 	 */
+	@Operation(summary = "依據用戶預定商品獲取配送訊息")
 	@CrossOrigin
 	@GetMapping("/getcusPreOrderProductDateInfo")
 	public ResultBean getcusProductDateInfo(@RequestParam(value="cus_id", required=true) String cus_id) {
@@ -135,6 +132,7 @@ public class GiftSystemController {
 	 * @param CusSelectData
 	 * @return
 	 */
+	@Operation(summary = "上傳用戶預定商品資料")
 	@CrossOrigin
 	@RequestMapping(value = "/postCusSelectData",method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
 	public ResultBean postCusSelectData(@RequestBody CusOrderInfo CusOrderInfo) {
@@ -155,6 +153,7 @@ public class GiftSystemController {
 	 * @param CusSelectData
 	 * @return
 	 */	
+	@Operation(summary = "上傳用戶商品寄送資料")
 	@CrossOrigin
 	@RequestMapping(value = "/putDeliveryData",method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE)
 	public ResultBean putDeliveryData(@RequestBody CusOrderInfo CusOrderInfo) {
@@ -175,6 +174,7 @@ public class GiftSystemController {
 	 * @param cus_id
 	 * @return
 	 */	
+	@Operation(summary = "用戶取消所有商品訂單")
 	@CrossOrigin
 	@GetMapping("/cancelAllCusSelectData")
 	public ResultBean cancelAllCusSelectData(@RequestParam(value="cus_id", required=true) String cus_id) {
@@ -195,6 +195,7 @@ public class GiftSystemController {
 	 * @param cus_id
 	 * @return
 	 */	
+	@Operation(summary = "用戶取消商品訂單")
 	@CrossOrigin
 	@GetMapping("/cancelCusSelectDataByOrderId")
 	public ResultBean cancelCusSelectDataByOrderId(@RequestParam(value="cus_id", required=true) String cus_id,
@@ -216,6 +217,7 @@ public class GiftSystemController {
 	 * @param product_id
 	 * @return
 	 */		
+	@Operation(summary = "獲取商品圖片")
 	@CrossOrigin
 	@GetMapping("/getProductImages")
 	public ResultBean getProductImages(@RequestParam(value="product_id", required=true) String product_id) {

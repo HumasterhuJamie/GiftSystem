@@ -7,6 +7,7 @@ import org.springframework.http.MediaType;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -19,11 +20,15 @@ import com.example.giftsystem.beans.ProductInfoReturnData;
 import com.example.giftsystem.beans.ResultBean;
 import com.example.giftsystem.service.GiftSystemMgmtService;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
+
 /**
  * 後臺管理系統的api
  * */
 @CrossOrigin
 @RestController
+@Tag(name = "管理者介面", description = "管理商品的上架、修改、刪除")
 public class GiftSystemMgmtController {
 	
 
@@ -34,6 +39,7 @@ public class GiftSystemMgmtController {
 	/**
 	 * 獲取可選擇之商品 
 	 */
+	@Operation(summary = "管理者獲取可選擇之商品 ")
 	@CrossOrigin
 	@GetMapping("/getProductInfoMgmt")
 	public ResultBean getProductInfo() {
@@ -56,9 +62,10 @@ public class GiftSystemMgmtController {
 	 /**
 	 *創建商品 
 	 */
+	 @Operation(summary = "創建商品")
 	 @CrossOrigin
 	 @RequestMapping(value = "/createProductInfo",method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
-	 public ResultBean createProductInfo(ProductInfo ProductInfo) {
+	 public ResultBean createProductInfo(@RequestBody ProductInfo ProductInfo) {
 		 ResultBean resultBean = new ResultBean();
 		 boolean isSuccess = false;
 		 isSuccess = giftsystemMgmtService.insertProductInfo(ProductInfo);
@@ -75,9 +82,10 @@ public class GiftSystemMgmtController {
 	 /**
 	 *創建商品 
 	 */
+	 @Operation(summary = "創建商品(Date)")
 	 @CrossOrigin
 	 @RequestMapping(value = "/createProductDateInfo",method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)	 
-	 public ResultBean createProductDateInfo(ProductDateInfo ProductDateInfo) {
+	 public ResultBean createProductDateInfo(@RequestBody ProductDateInfo ProductDateInfo) {
 		 ResultBean resultBean = new ResultBean();
 		 boolean isSuccess = false;
 		 isSuccess = giftsystemMgmtService.insertProductDateInfo(ProductDateInfo);
@@ -94,9 +102,10 @@ public class GiftSystemMgmtController {
 	 /**
 	 *更新商品 
 	 */
+	 @Operation(summary = "更新商品資訊")
 	 @CrossOrigin
 	 @RequestMapping(value = "/updateProductInfo",method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE)	 
-	 public ResultBean updateProductInfo(ProductInfo ProductInfo) {
+	 public ResultBean updateProductInfo(@RequestBody ProductInfo ProductInfo) {
 		 ResultBean resultBean = new ResultBean();
 		 boolean isSuccess = false;
 		 isSuccess = giftsystemMgmtService.updateProductInfo(ProductInfo);
@@ -113,9 +122,10 @@ public class GiftSystemMgmtController {
 	 /**
 	 *更新商品 
 	 */
+	 @Operation(summary = "更新商品資訊(Date)")
 	 @CrossOrigin
 	 @RequestMapping(value = "/updateProductDateInfo",method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE)	 
-	 public ResultBean updateProductDateInfo(ProductDateInfo ProductDateInfo) {
+	 public ResultBean updateProductDateInfo(@RequestBody ProductDateInfo ProductDateInfo) {
 		 ResultBean resultBean = new ResultBean();
 		 boolean isSuccess = false;
 		 isSuccess = giftsystemMgmtService.updateProductDateInfo(ProductDateInfo);
@@ -132,9 +142,10 @@ public class GiftSystemMgmtController {
 	 /**
 	 *刪除商品 
 	 */
+	 @Operation(summary = "刪除商品所有資訊")
 	 @CrossOrigin
-	 @RequestMapping(value = "/deleteProductInfo",method = RequestMethod.DELETE, consumes = MediaType.APPLICATION_JSON_VALUE)	 
-	 public ResultBean deleteProductInfo(int id) {
+	 @RequestMapping(value = "/deleteProductInfo/{id}",method = RequestMethod.DELETE)	 
+	 public ResultBean deleteProductInfo(@PathVariable("id") int id) {
 		 ResultBean resultBean = new ResultBean();
 		 boolean isSuccess = false;
 		 isSuccess = giftsystemMgmtService.deleteProductInfo(id);
@@ -151,9 +162,10 @@ public class GiftSystemMgmtController {
 	 /**
 	 *更新商品 
 	 */
+	 @Operation(summary = "刪除商品所有資訊(Date)")
 	 @CrossOrigin
-	 @RequestMapping(value = "/deleteProductDateInfo",method = RequestMethod.DELETE, consumes = MediaType.APPLICATION_JSON_VALUE)	 
-	 public ResultBean deleteProductDateInfo(int id) {
+	 @RequestMapping(value = "/deleteProductDateInfo/{id}",method = RequestMethod.DELETE)	 
+	 public ResultBean deleteProductDateInfo(@PathVariable("id") int id) {
 		 ResultBean resultBean = new ResultBean();
 		 boolean isSuccess = false;
 		 isSuccess = giftsystemMgmtService.deleteProductDateInfo(id);

@@ -32,12 +32,13 @@ public class GiftSystemMgmtDao {
 	private NamedParameterJdbcTemplate namedParameterjdbctemplate;
 	//新增商品
 	public boolean insertProductInfo(ProductInfo ProductInfo) {	
-		try {
-		jdbctemplate.update("insert into product_info(product_id, product_name, product_stock, porduct_total, product_type, img_url, supplier, price) values (?,?,?,?,?,?,?,?)",
+		try {	
+		jdbctemplate.update("insert into product_info(product_id, product_name, product_stock, total, product_type, img_url, supplier, price) values (?,?,?,?,?,?,?,?)",
 				ProductInfo.getProduct_id(),ProductInfo.getProduct_name(),ProductInfo.getProduct_stock(),ProductInfo.getPorduct_total(),
 				ProductInfo.getProduct_type(),ProductInfo.getImg_url(),ProductInfo.getSupplier(),ProductInfo.getPrice());
 			return true;
 		}catch(Exception e) {
+			System.out.println(e.getMessage());
 			return false;
 		}
 	}
@@ -49,11 +50,12 @@ public class GiftSystemMgmtDao {
 	//更新商品
 	public boolean updateProductInfo(ProductInfo ProductInfo) {	
 		try {
-		jdbctemplate.update("update product_info set product_id = ?,product_name = ?,product_stock= ? ,porduct_total = ?,product_type = ?,img_url = ?,supplier = ?,price = ?"
+		jdbctemplate.update("update product_info set product_id = ?,product_name = ?,product_stock= ? ,total = ?,product_type = ?,img_url = ?,supplier = ?,price = ?"
 				+ "where id = ?",ProductInfo.getProduct_id(),ProductInfo.getProduct_name(),ProductInfo.getProduct_stock(),ProductInfo.getPorduct_total(),
 				ProductInfo.getProduct_type(),ProductInfo.getImg_url(),ProductInfo.getSupplier(),ProductInfo.getPrice(),ProductInfo.getId());		
 			return true;
 		}catch(Exception e) {
+			System.out.println(e.getMessage());
 			return false;
 		}
 	}
@@ -63,6 +65,7 @@ public class GiftSystemMgmtDao {
 		jdbctemplate.update("delete from product_info where id = ?",id);	
 			return true;
 		}catch(Exception e) {
+			System.out.println(e.getMessage());
 			return false;
 		}
 	}
@@ -75,6 +78,7 @@ public class GiftSystemMgmtDao {
 				new java.sql.Date(ProductDateInfo.getProduct_date().getTime()),	new java.sql.Date(ProductDateInfo.getProduct_display_date().getTime()));
 			return true;
 		}catch(Exception e) {
+			System.out.println(e.getMessage());
 			return false;
 		}
 	}
@@ -91,6 +95,7 @@ public class GiftSystemMgmtDao {
 				new java.sql.Date(ProductDateInfo.getProduct_date().getTime()),	new java.sql.Date(ProductDateInfo.getProduct_display_date().getTime()),ProductDateInfo.getId());		
 			return true;
 		}catch(Exception e) {
+			System.out.println(e.getMessage());
 			return false;
 		}
 	}
@@ -100,6 +105,7 @@ public class GiftSystemMgmtDao {
 		jdbctemplate.update("delete from product_date_info where id = ?",id);		
 			return true;
 		}catch(Exception e) {
+			System.out.println(e.getMessage());
 			return false;
 		}
 	}
