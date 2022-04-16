@@ -41,7 +41,6 @@ public class GiftSystemDao {
 		
 	}	
 	public void saveDeliveryData(CusOrderInfo cusSelectData) {
-		jdbctemplate.execute("commit;");
 		jdbctemplate.update("update cus_select_data set cus_address = ?, cus_phone = ?, cus_email = ?, cus_deliver_date = ?,  product_status = ?"
 				+ ", receive_time = ?, recipient = ?, cus_mobile = ?, cus_city = ? where cus_id = ? and product_id = ? and product_status = ? and id = ?",
 				cusSelectData.getCus_address(), cusSelectData.getCus_phone(), cusSelectData.getCus_email(), new java.sql.Date(cusSelectData.getCus_deliver_date().getTime()), 
@@ -116,8 +115,6 @@ public class GiftSystemDao {
 	}
 	
 	public ProductDateInfo getProductDateInfoById(String product_id, java.util.Date product_date) {
-		// for update  把這一筆資料鎖定 等 update 後 commit 才會放掉		
-		jdbctemplate.execute("begin;");
 		List<ProductDateInfo> productDateInfos = jdbctemplate.query("select * from product_date_info where product_id = ? and product_date = ? for update ",
 				new ProductDateInfoMapper(), new Object[]{product_id, new java.sql.Date(product_date.getTime())});
 		if (productDateInfos == null || productDateInfos.isEmpty()) {
@@ -135,7 +132,6 @@ public class GiftSystemDao {
 	public int updateProductDateInfoStock(ProductDateInfo productDateInfo) {
 		int result = jdbctemplate.update("update product_date_info set product_date_stock = ? where product_id = ? and product_date = ?"
 				, new Object[]{productDateInfo.getProduct_date_stock(), productDateInfo.getProduct_id(), new java.sql.Date(productDateInfo.getProduct_date().getTime())});
-		jdbctemplate.execute("commit;");		
 		return result;
 	}
 	
